@@ -1,5 +1,6 @@
 let start = 1;
 let moves = [];
+let winner = false;
 
 let piece = function() {
   let piece = 'X';
@@ -20,20 +21,22 @@ let winConditions = [
   [1, 5, 9],
   [3, 5, 7] ];
 
-document.addEventListener('click', function() {
-  if (event.target.id !== 'reset') {
-    if (start === 9) {
-      setTimeout(() => { alert('NOBODY WINS') }, 300)
-    }
-    if (!moves.includes(event.target.id)) {
-      document.getElementById(event.target.id).innerHTML = piece()
-      moves.push(event.target.id);
-      checkWinner(Number(event.target.id));
+  document.addEventListener('click', function() {
+
+    if (event.target.id !== 'reset' && event.target.id) {
+      if (!moves.includes(event.target.id)) {
+        document.getElementById(event.target.id).innerHTML = piece()
+        moves.push(event.target.id);
+        checkWinner(Number(event.target.id));
     } else {
       console.log('Illegal Move');
     }
+    if (moves.length === 9 && !winner) {
+      setTimeout(() => { alert('NOBODY WINS') }, 200)
   }
-  if (event.target.id === 'reset') {
+  }
+
+  else if (event.target.id === 'reset') {
     start = 1;
     moves = [];
     winConditions = [
@@ -50,13 +53,11 @@ document.addEventListener('click', function() {
       obj[i].innerHTML = ''
     }
   }
-
 });
 
 let checkWinner = function(id) {
 
   let player;
-  let isWinner = false;
 
   if (start % 2 === 0) {
     player = 'X'
@@ -73,6 +74,7 @@ let checkWinner = function(id) {
     let winning = (typeof arr[0] !== 'number') && (arr[0] === arr[1]) && (arr[1] === arr[2]);
 
     if (winning) {
+      winner = true;
       setTimeout(() => {
         alert(`${player} wins`)}, 200)
     }
