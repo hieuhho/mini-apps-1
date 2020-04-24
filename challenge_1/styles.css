@@ -1,8 +1,4 @@
 table {
-  /* display: flex;
-  justify-content: space-between; */
-  width: 300px;
-  height: 300px;
   margin: 5px;
   table-layout:fixed;
   vertical-align: middle;
@@ -10,9 +6,7 @@ table {
 }
 
 .square {
+  width: 100px;
+  height: 100px;
   border: 2px solid black;
-}
-
-#sa {
-  display: hidden;
 }
