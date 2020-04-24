@@ -10,6 +10,34 @@ let boardPiece = function() {
   return piece;
 }
 
+let canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+canvas.width = 300;
+canvas.height = 300;
+context.lineWidth = 3;
+
+context.beginPath()
+context.moveTo(100, 0);
+context.lineTo(100, 300);
+context.stroke();
+
+context.beginPath()
+context.moveTo(200, 0);
+context.lineTo(200, 300);
+context.stroke();
+
+context.beginPath()
+context.moveTo(0, 100);
+context.lineTo(300, 100);
+context.stroke();
+
+context.beginPath()
+context.moveTo(0, 200);
+context.lineTo(300, 200);
+context.stroke();
+
+
 document.getElementsByClassName('boardpiece')[0].addEventListener('click', function() {
   document.getElementsByClassName('boardpiece')[0].innerHTML = boardPiece();
 })
