@@ -38,6 +38,15 @@ context.lineTo(300, 200);
 context.stroke();
 
 
+window.onclick = function(e) {
+  if (e.pageX < 300 && e.pageY < 300) {
+    let clickX = Math.floor(e.pageX / (300/3));
+    let clickY = Math.floor(e.pageY / (300/3));
+    console.log(clickX, clickY)
+  }
+}
+
+
 document.getElementsByClassName('boardpiece')[0].addEventListener('click', function() {
   document.getElementsByClassName('boardpiece')[0].innerHTML = boardPiece();
 })
