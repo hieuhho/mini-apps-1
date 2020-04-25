@@ -26,7 +26,13 @@ class App extends React.Component{
         email: '',
         addressOne: '',
         creditCard: '',
-      }
+      },
+      checkout: true,
+      form1: false,
+      form2: false,
+      form3: false,
+      confirm: false,
+      purchased: false
     }
   }
   /*
@@ -99,9 +105,12 @@ class App extends React.Component{
       body: JSON.stringify(formOne)
     })
     .then((response) => { return console.log(response.json()) })
-    .catch((err) => { console.error(err) })
+    .catch((err) => { console.error(err) });
+    this.setState({
+      form1: false,
+      form2: true
+    })
   };
-
 
   handleTwoSubmit(event) {
     event.preventDefault();
@@ -115,8 +124,12 @@ class App extends React.Component{
       body: JSON.stringify(formTwo)
     })
     .then((response) => { return console.log(response.json()) })
-    .catch((err) => { console.error(err) })
-  }
+    .catch((err) => { console.error(err) });
+    this.setState({
+      form2: false,
+      form3: true
+    })
+  };
 
   handleThreeSubmit(event) {
     event.preventDefault();
@@ -130,13 +143,57 @@ class App extends React.Component{
       body: JSON.stringify(formThree)
     })
     .then((response) => { return console.log(response.json()) })
-    .catch((err) => { console.error(err) })
+    .catch((err) => { console.error(err) });
+    this.setState({
+      form3: false,
+      confirm: true
+    })
   }
+
+  // handleGet(event) {
+  //   event.preventDefault();
+  //   let unique = this.state.unique;
+  //   fetch('/confirm', {
+  //     method: "GET",
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify(unique)
+  //   })
+  //   .then((response) => { return console.log(response.json()) })
+  //   .catch((err) => { console.error(err) })
+  // }
+
+  handleCheckout(event) {
+    event.preventDefault();
+    this.setState({
+      checkout: false,
+      form1: true
+    })
+  }
+
+  handlePurchase(event) {
+    event.preventDefault();
+    this.setState({
+      confirm: false,
+      checkout: true
+    })
+  }
+
 
   render() {
     return (
       <div>
-        <div className="formOne">
+        <div className="checkout">
+          { this.state.checkout &&
+            <button className="checkout" onClick={this.handleCheckout.bind(this)}>checkout</button>
+          }
+        </div>
+
+        <div>
+          { this.state.form1 &&
+            <div className="formOne">
           <form>
 
             <div className="name">
@@ -173,8 +230,12 @@ class App extends React.Component{
 
           </form>
         </div>
+          }
+        </div>
 
-        <div className="formTWo">
+        <div>
+          { this.state.form2 &&
+          <div className="formTWo">
           <form>
 
             <div className="addressOne">
@@ -243,8 +304,12 @@ class App extends React.Component{
 
           </form>
         </div>
+          }
+        </div>
 
-        <div className="formThree">
+        <div>
+          { this.state.form3 &&
+          <div className="formThree">
           <form>
 
             <div className="creditCard">
@@ -295,8 +360,61 @@ class App extends React.Component{
 
           </form>
         </div>
+          }
+        </div>
 
-        <button>clickme</button>
+        <div className="confirm">
+          { this.state.confirm &&
+          <div>
+            <div style={{fontSize: "20px"}}> Please Confirm </div>
+            <div>
+              <div> Account </div>
+              <div>
+                <div>
+                  <b>Name: </b>{this.state.formOne.name}
+                </div>
+                <div>
+                  <b>Email: </b>{this.state.formOne.email}
+                </div>
+
+              </div>
+            </div>
+
+            <div>
+              <div> Shipping </div>
+              <div>
+                <div>
+                  <b>Address: </b>{this.state.formTwo.addressOne}
+                </div>
+                <div>
+                  <b>City: </b>{this.state.formTwo.city}
+                </div>
+                <div>
+                  <b>State: </b>{this.state.formTwo.state}
+                </div>
+                <div>
+                  <b>Zip Code: </b>{this.state.formTwo.zip}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div> Payment </div>
+              <div>
+                <div>
+                  <b>Credit Card: </b>card ending in {this.state.formThree.creditCard.substring(this.state.formThree.creditCard.length - 4)}
+                </div>
+              </div>
+            </div>
+
+
+            <button onClick={this.handlePurchase.bind(this)}> Purchase </button>
+          </div>
+
+          }
+        </div>
+
+
       </div>
     )
   }

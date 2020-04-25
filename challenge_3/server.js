@@ -24,6 +24,12 @@ app.post('/formThree', (req, res) => {
   res.end()
 });
 
+app.get('/confirm', (req, res) => {
+  console.log('res: ', res);
+  console.log('req: ', req);
+  res.end()
+})
+
 const port = 2020;
 
 app.listen(port, () => {
