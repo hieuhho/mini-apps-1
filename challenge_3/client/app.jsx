@@ -45,10 +45,26 @@ class App extends React.Component{
     })
   };
 
+  handleChangeTwo(propertyName, event) {
+    const formTwo = this.state.formTwo;
+    formTwo[propertyName] = event.target.value;
+    this.setState({
+      formTwo: formTwo
+    })
+  };
+
+  handleChangeThree(propertyName, event) {
+    const formThree = this.state.formThree;
+    formThree[propertyName] = event.target.value;
+    this.setState({
+      formThree: formThree
+    })
+  };
+
   handleOneSubmit(event) {
     event.preventDefault();
     let formOne = this.state.formOne;
-    fetch('/checkout', {
+    fetch('/formOne', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -60,30 +76,35 @@ class App extends React.Component{
     .catch((err) => { console.error(err) })
   };
 
-  handleChangeTwo(propertyName, event) {
-    const formTwo = this.state.formTwo;
-    formTwo[propertyName] = event.target.value;
-    this.setState({
-      formTwo: formTwo
-    })
-  };
 
   handleTwoSubmit(event) {
     event.preventDefault();
-    console.log(this.state.formTwo);
-  }
-
-  handleChangeThree(propertyName, event) {
-    const formThree = this.state.formThree;
-    formThree[propertyName] = event.target.value;
-    this.setState({
-      formThree: formThree
+    let formTwo = this.state.formTwo;
+    fetch('/formTwo', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formTwo)
     })
-  };
+    .then((response) => { return console.log(response.json()) })
+    .catch((err) => { console.error(err) })
+  }
 
   handleThreeSubmit(event) {
     event.preventDefault();
-    console.log(this.state.formThree);
+    let formThree = this.state.formThree;
+    fetch('/formThree', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formThree)
+    })
+    .then((response) => { return console.log(response.json()) })
+    .catch((err) => { console.error(err) })
   }
 
   render() {

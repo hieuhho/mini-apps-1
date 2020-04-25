@@ -8,7 +8,7 @@ let formOneSchema = mongoose.Schema({
   password: String
 });
 let formTwoSchema = mongoose.Schema({
-  addressOne: String,
+  addressOne: {type: String, unique: true},
   addressTwo: String,
   city: String,
   state: String,
@@ -16,7 +16,7 @@ let formTwoSchema = mongoose.Schema({
   phone: Number
 });
 let formThreeSchema = mongoose.Schema({
-  creditCard: Number,
+  creditCard: {type: Number, unique: true},
   expiration: Number,
   CVV: Number,
   billingZip: Number
