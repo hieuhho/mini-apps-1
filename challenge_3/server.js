@@ -5,22 +5,27 @@ const db = require('./database');
 app.use(express.static('public'));
 app.use(express.json());
 
+app.post('/checkout', (req, res) => {
+  db.newCheckout(req.body);
+  res.send({lol: res.body})
+  res.end()
+})
+
 app.post('/formOne', (req, res) => {
-
   db.saveOne(req.body)
-  res.send({lol: 420})
+  res.send({lol: 'OK'})
   res.end()
 });
+
 app.post('/formTwo', (req, res) => {
-
   db.saveTwo(req.body)
-  res.send({lol: 420})
+  res.send({lol: "OK"})
   res.end()
 });
-app.post('/formThree', (req, res) => {
 
+app.post('/formThree', (req, res) => {
   db.saveThree(req.body)
-  res.send({lol: 420})
+  res.send({lol: "OK"})
   res.end()
 });
 

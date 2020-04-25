@@ -63,11 +63,12 @@ let saveOne = (form) => {
     password: form.password
   };
 
-  UserData.update({ checkoutID: `${form.checkoutID}`}, formOne, (err, doc) => {
+  UserData.updateOne({ checkoutID: `${form.checkoutID}`}, formOne, (err, doc) => {
     if (err) {
       return console.error('SAVE FORM ONE ERROR', err.message)
+    } else {
+      return console.log('Form One Submitted!')
     }
-    console.log('Form One Submitted!')
   })
 };
 
@@ -81,7 +82,7 @@ let saveTwo = (form) => {
     phone: form.phone
   };
 
-  UserData.update({ checkoutID: `${form.checkoutID}`}, formTwo, (err, doc) => {
+  UserData.updateOne({ checkoutID: `${form.checkoutID}`}, formTwo, (err, doc) => {
     if (err) {
       return console.error('SAVE FORM TWO ERROR', err.message)
     }
@@ -97,7 +98,7 @@ let saveThree = (form) => {
     billingZip: form.billingZip
   };
 
-  UserData.update({ checkoutID: `${form.checkoutID}`}, formThree, (err, doc) => {
+  UserData.updateOne({ checkoutID: `${form.checkoutID}`}, formThree, (err, doc) => {
     if (err) {
       return console.error('SAVE FORM THREE ERROR', err.message)
     }
@@ -105,6 +106,7 @@ let saveThree = (form) => {
   })
 };
 
+module.exports.newCheckout = newCheckout;
 module.exports.saveOne = saveOne;
 module.exports.saveTwo = saveTwo;
 module.exports.saveThree = saveThree;

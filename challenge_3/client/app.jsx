@@ -36,18 +36,6 @@ class App extends React.Component{
       purchased: false
     }
   }
-  /*
-  start out hidden
-  if checkout is clicked
-  form 1 reveal
-  if next(form2) click
-  hide form1, reveal form 2
-  if next(form3) click
-  hide form2 reveal 3
-  when click done
-  hides all
-  redirect to home
-  */
 
   handleChangeOne(propertyName, event) {
     const formOne = this.state.formOne;
@@ -97,6 +85,7 @@ class App extends React.Component{
   handleOneSubmit(event) {
     event.preventDefault();
     let formOne = this.state.formOne;
+    formOne['checkoutID'] = this.state.checkoutID;
     fetch('/formOne', {
       method: "POST",
       headers: {
@@ -116,6 +105,7 @@ class App extends React.Component{
   handleTwoSubmit(event) {
     event.preventDefault();
     let formTwo = this.state.formTwo;
+    formTwo['checkoutID'] = this.state.checkoutID;
     fetch('/formTwo', {
       method: "POST",
       headers: {
@@ -135,6 +125,7 @@ class App extends React.Component{
   handleThreeSubmit(event) {
     event.preventDefault();
     let formThree = this.state.formThree;
+    formThree['checkoutID'] = this.state.checkoutID;
     fetch('/formThree', {
       method: "POST",
       headers: {
@@ -168,8 +159,17 @@ class App extends React.Component{
 
   handleCheckout(event) {
     event.preventDefault();
+    fetch('/checkout', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({checkoutID: this.state.checkoutID})
+    })
+    .then((response) => { return console.log(response.json()) })
+    .catch((err) => { console.error(err) });
     this.setState({
-      checkoutID: this.state.checkoutID + 1,
       checkout: false,
       form1: true
     })
@@ -178,6 +178,7 @@ class App extends React.Component{
   handlePurchase(event) {
     event.preventDefault();
     this.setState({
+      checkoutID: this.state.checkoutID + 1,
       confirm: false,
       checkout: true
     })
