@@ -63,100 +63,175 @@ class App extends React.Component{
     console.log(this.state.formTwo);
   }
 
+  handleChangeThree(propertyName, event) {
+    const formThree = this.state.formThree;
+    formThree[propertyName] = event.target.value;
+    this.setState({
+      formThree: formThree
+    })
+  };
+
+  handleThreeSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.formThree);
+  }
+
   render() {
     return (
       <div>
         <div className="formOne">
           <form>
 
-            <label className="name">
-              <input
-              placeholder="Name"
-              type="text"
-              name="name"
-              value={this.state.formOne.name}
-              onChange={this.handleChangeOne.bind(this, 'name')}/></label>
+            <div className="name">
+              <label>
+                <input
+                placeholder="Name"
+                type="text"
+                name="name"
+                value={this.state.formOne.name}
+                onChange={this.handleChangeOne.bind(this, 'name')}/></label>
+              </div>
 
-              <label className="email">
+            <div className="email">
+              <label>
                 <input
                 placeholder="Email"
                 type="text"
                 name="email"
                 value={this.state.formOne.email}
                 onChange={this.handleChangeOne.bind(this, 'email')}/></label>
+            </div>
 
-              <label className="password">
+            <div className="password">
+              <label>
                 <input
                 placeholder="Password"
                 type="password"
                 name="password"
                 value={this.state.formOne.password}
                 onChange={this.handleChangeOne.bind(this, 'password')}/></label>
+            </div>
 
-                <button className="formOneSubmit" onClick={this.handleOneSubmit.bind(this)}>Next</button>
+            <button className="formOneSubmit" onClick={this.handleOneSubmit.bind(this)}>Next</button>
 
           </form>
-
         </div>
 
         <div className="formTWo">
-
           <form>
 
-          <label className="addressOne">
-              <input
-              placeholder="Address"
-              type="text"
-              name="addressOne"
-              value={this.state.formTwo.addressOne}
-              onChange={this.handleChangeTwo.bind(this, 'addressOne')}/></label>
+            <div className="addressOne">
+              <label>
+                <input
+                placeholder="Address"
+                type="text"
+                name="addressOne"
+                value={this.state.formTwo.addressOne}
+                onChange={this.handleChangeTwo.bind(this, 'addressOne')}/></label>
+            </div>
 
-          <label className="addressTWo">
-              <input
-              placeholder="Address 2 (optional)"
-              type="text"
-              name="addressTWo"
-              value={this.state.formTwo.addressTWo}
-              onChange={this.handleChangeTwo.bind(this, 'addressTWo')}/></label>
+            <div className="addressTWo">
+              <label>
+                <input
+                placeholder="Address 2 (optional)"
+                type="text"
+                name="addressTWo"
+                value={this.state.formTwo.addressTWo}
+                onChange={this.handleChangeTwo.bind(this, 'addressTWo')}/></label>
+            </div>
 
-          <label className="city">
-              <input
-              placeholder="City"
-              type="text"
-              name="city"
-              value={this.state.formTwo.city}
-              onChange={this.handleChangeTwo.bind(this, 'city')}/></label>
+            <div className="city">
+              <label>
+                <input
+                placeholder="City"
+                type="text"
+                name="city"
+                value={this.state.formTwo.city}
+                onChange={this.handleChangeTwo.bind(this, 'city')}/></label>
+            </div>
 
-          <label className="state">
-              <input
-              placeholder="State"
-              type="text"
-              name="state"
-              value={this.state.formTwo.state}
-              onChange={this.handleChangeTwo.bind(this, 'state')}/></label>
+            <div className="state">
+              <label>
+                <input
+                  placeholder="State"
+                  type="text"
+                  name="state"
+                  value={this.state.formTwo.state}
+                  onChange={this.handleChangeTwo.bind(this, 'state')}/></label>
+            </div>
 
-          <label className="zip">
-              <input
-              placeholder="Zip"
-              type="text"
-              name="zip"
-              value={this.state.formTwo.zip}
-              onChange={this.handleChangeTwo.bind(this, 'zip')}/></label>
+            <div className="zip">
+              <label>
+                <input
+                placeholder="Zip"
+                type="text"
+                name="zip"
+                value={this.state.formTwo.zip}
+                onChange={this.handleChangeTwo.bind(this, 'zip')}/></label>
+            </div>
 
-          <label className="phone">
-              <input
-              placeholder="Phone"
-              type="text"
-              name="phone"
-              value={this.state.formTwo.phone}
-              onChange={this.handleChangeTwo.bind(this, 'phone')}/></label>
+            <div className="phone">
+              <label>
+                <input
+                placeholder="Phone"
+                type="text"
+                name="phone"
+                value={this.state.formTwo.phone}
+                onChange={this.handleChangeTwo.bind(this, 'phone')}/></label>
+            </div>
 
-          <button className="formTwoSubmit" onClick={this.handleTwoSubmit.bind(this)}>Next</button>
+            <button className="formTwoSubmit" onClick={this.handleTwoSubmit.bind(this)}>Next</button>
 
           </form>
-
         </div>
 
+        <div className="formThree">
+          <form>
+
+            <div className="creditCard">
+              <label>
+                <input
+                placeholder="Credit Card #"
+                type="text"
+                name="creditCard"
+                value={this.state.formThree.creditCard}
+                onChange={this.handleChangeThree.bind(this, 'creditCard')}/></label>
+            </div>
+
+            <div className="expiration">
+              <label>
+                <input
+                placeholder="Experation Date (mmyy)"
+                type="text"
+                name="expiration"
+                value={this.state.formThree.expiration}
+                onChange={this.handleChangeThree.bind(this, 'expiration')}/></label>
+            </div>
+
+            <div className="CVV">
+              <label>
+                <input
+                placeholder="CVV"
+                type="text"
+                name="CVV"
+                value={this.state.formThree.CVV}
+                onChange={this.handleChangeThree.bind(this, 'CVV')}/></label>
+            </div>
+
+            <div className="billingZip">
+              <label>
+                <input
+                placeholder="Billing Zip Code"
+                type="text"
+                name="billingZip"
+                value={this.state.formThree.billingZip}
+                onChange={this.handleChangeThree.bind(this, 'billingZip')}/></label>
+            </div>
+
+            <button className="formThreeSubmit" onClick={this.handleThreeSubmit.bind(this)}>Next</button>
+
+          </form>
+        </div>
 
         <button>clickme</button>
       </div>
