@@ -1,10 +1,15 @@
 const express= require('express');
 const app = express();
+const db = require('./database');
 
-app.use(express.static('public'))
+app.use(express.static('public'));
+app.use(express.json());
 
-app.get('/checkout', (req, res) => {
-  res.send('hello World')
+app.post('/checkout', (req, res) => {
+  console.log('req: ', req.body);
+  db.saveOne(req.body)
+  res.send({lol: 420})
+  res.end()
 });
 
 const port = 2020;

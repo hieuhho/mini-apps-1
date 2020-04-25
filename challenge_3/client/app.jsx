@@ -47,7 +47,17 @@ class App extends React.Component{
 
   handleOneSubmit(event) {
     event.preventDefault();
-    console.log(this.state.formOne);
+    let formOne = this.state.formOne;
+    fetch('/checkout', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formOne)
+    })
+    .then((response) => { return console.log(response.json()) })
+    .catch((err) => { console.error(err) })
   };
 
   handleChangeTwo(propertyName, event) {
@@ -96,7 +106,7 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="Email"
-                type="text"
+                type="email"
                 name="email"
                 value={this.state.formOne.email}
                 onChange={this.handleChangeOne.bind(this, 'email')}/></label>
@@ -130,14 +140,14 @@ class App extends React.Component{
                 onChange={this.handleChangeTwo.bind(this, 'addressOne')}/></label>
             </div>
 
-            <div className="addressTWo">
+            <div className="addressTwo">
               <label>
                 <input
                 placeholder="Address 2 (optional)"
                 type="text"
-                name="addressTWo"
-                value={this.state.formTwo.addressTWo}
-                onChange={this.handleChangeTwo.bind(this, 'addressTWo')}/></label>
+                name="addressTwo"
+                value={this.state.formTwo.addressTwo}
+                onChange={this.handleChangeTwo.bind(this, 'addressTwo')}/></label>
             </div>
 
             <div className="city">
@@ -164,8 +174,9 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="Zip"
-                type="text"
+                type="number"
                 name="zip"
+                maxLength="5"
                 value={this.state.formTwo.zip}
                 onChange={this.handleChangeTwo.bind(this, 'zip')}/></label>
             </div>
@@ -174,9 +185,10 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="Phone"
-                type="text"
+                type="tel"
                 name="phone"
                 value={this.state.formTwo.phone}
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 onChange={this.handleChangeTwo.bind(this, 'phone')}/></label>
             </div>
 
@@ -192,8 +204,9 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="Credit Card #"
-                type="text"
+                type="number"
                 name="creditCard"
+                maxLength="16"
                 value={this.state.formThree.creditCard}
                 onChange={this.handleChangeThree.bind(this, 'creditCard')}/></label>
             </div>
@@ -202,8 +215,9 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="Experation Date (mmyy)"
-                type="text"
+                type="number"
                 name="expiration"
+                maxLength="4"
                 value={this.state.formThree.expiration}
                 onChange={this.handleChangeThree.bind(this, 'expiration')}/></label>
             </div>
@@ -212,8 +226,9 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="CVV"
-                type="text"
+                type="number"
                 name="CVV"
+                maxLength="3"
                 value={this.state.formThree.CVV}
                 onChange={this.handleChangeThree.bind(this, 'CVV')}/></label>
             </div>
@@ -222,8 +237,9 @@ class App extends React.Component{
               <label>
                 <input
                 placeholder="Billing Zip Code"
-                type="text"
+                type="number"
                 name="billingZip"
+                maxLength="5"
                 value={this.state.formThree.billingZip}
                 onChange={this.handleChangeThree.bind(this, 'billingZip')}/></label>
             </div>
