@@ -39,6 +39,7 @@ let winConditions = [
   else if (event.target.id === 'reset') {
     start = 1;
     moves = [];
+    let winner = false;
     winConditions = [
       [1, 2, 3],
       [4, 5, 6],
@@ -49,8 +50,10 @@ let winConditions = [
       [1, 5, 9],
       [3, 5, 7] ];
     let obj = document.getElementsByClassName('square');
-    for (var i = 0; obj.length; i++) {
-      obj[i].innerHTML = ''
+    for (var i = 0; i < obj.length; i++) {
+      if (obj.item(i)) {
+        obj.item(i).innerHTML = '';
+      }
     }
   }
 });
