@@ -3,6 +3,7 @@ class App extends React.Component{
     super(props);
 
     this.state = {
+      checkoutID: 0,
       formOne: {
         name: '',
         email: '',
@@ -168,6 +169,7 @@ class App extends React.Component{
   handleCheckout(event) {
     event.preventDefault();
     this.setState({
+      checkoutID: this.state.checkoutID + 1,
       checkout: false,
       form1: true
     })
