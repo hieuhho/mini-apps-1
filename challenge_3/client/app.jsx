@@ -21,6 +21,11 @@ class App extends React.Component{
         expiration: '',
         CVV: '',
         billingZip: ''
+      },
+      unique: {
+        email: '',
+        addressOne: '',
+        creditCard: '',
       }
     }
   }
@@ -43,6 +48,13 @@ class App extends React.Component{
     this.setState({
       formOne: formOne
     })
+    if (propertyName === 'email') {
+      const unique = this.state.unique;
+      unique[propertyName] = event.target.value;
+      this.setState({
+        unique: unique
+      })
+    }
   };
 
   handleChangeTwo(propertyName, event) {
@@ -51,6 +63,13 @@ class App extends React.Component{
     this.setState({
       formTwo: formTwo
     })
+    if (propertyName === 'addressOne') {
+      const unique = this.state.unique;
+      unique[propertyName] = event.target.value;
+      this.setState({
+        unique: unique
+      })
+    }
   };
 
   handleChangeThree(propertyName, event) {
@@ -59,6 +78,13 @@ class App extends React.Component{
     this.setState({
       formThree: formThree
     })
+    if (propertyName === 'creditCard') {
+      const unique = this.state.unique;
+      unique[propertyName] = event.target.value;
+      this.setState({
+        unique: unique
+      })
+    }
   };
 
   handleOneSubmit(event) {
