@@ -29,10 +29,16 @@ app.post('/formThree', (req, res) => {
   res.end()
 });
 
-app.get('/confirm', (req, res) => {
-  console.log('res: ', res);
-  console.log('req: ', req);
-  res.end()
+app.post('/purchase', (req, res) => {
+  return db.find(req.body)
+  .then((data) => {
+    res.send(data)
+    res.end()
+  })
+  .catch((err) => {
+    console.error('ERROR PURCHASE', err)
+    res.end()
+  })
 })
 
 const port = 2020;

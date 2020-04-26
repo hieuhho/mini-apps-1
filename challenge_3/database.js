@@ -1,47 +1,26 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/checkout');
+mongoose.connect('mongodb://localhost/checkout', { useNewUrlParser: true });
 
-let formOneSchema = mongoose.Schema({
-  name: String,
-  email: {type: String, unique: true},
-  password: String
-});
-let formTwoSchema = mongoose.Schema({
-  addressOne: {type: String, unique: true},
-  addressTwo: String,
-  city: String,
-  state: String,
-  zipCode: Number,
-  phone: Number
-});
-let formThreeSchema = mongoose.Schema({
-  creditCard: {type: Number, unique: true},
-  expiration: Number,
-  CVV: Number,
-  billingZip: Number
-});
+
 
 let userDataSchema = mongoose.Schema({
   checkoutID: {type: Number, unique: true},
   name: String,
-  email: {type: String, unique: true},
+  email: String,
   password: String,
-  addressOne: {type: String, unique: true},
+  addressOne: String,
   addressTwo: String,
   city: String,
   state: String,
   zipCode: Number,
   phone: Number,
-  creditCard: {type: Number, unique: true},
+  creditCard: Number,
   expiration: Number,
   CVV: Number,
   billingZip: Number
 });
 
-let FormOne = mongoose.model('FormOne', formOneSchema);
-let FormTwo = mongoose.model('FormTwo', formTwoSchema);
-let FormThree = mongoose.model('FormThree', formThreeSchema);
 let UserData = mongoose.model('UserData', userDataSchema);
 
 let newCheckout = (form) => {
@@ -50,7 +29,7 @@ let newCheckout = (form) => {
   })
   newCheckout.save((err, doc) => {
     if (err) {
-      return console.error('SAVE FORM ONE ERROR', err.message)
+      return console.error('CHECK OUT ERROR', err.message)
     }
     console.log('Checking Out!')
   })
@@ -106,7 +85,14 @@ let saveThree = (form) => {
   })
 };
 
+let find = (form) => {
+  return UserData.find({
+    checkoutID: `${form.checkoutID}`
+  });
+}
+
 module.exports.newCheckout = newCheckout;
 module.exports.saveOne = saveOne;
 module.exports.saveTwo = saveTwo;
 module.exports.saveThree = saveThree;
+module.exports.find = find;

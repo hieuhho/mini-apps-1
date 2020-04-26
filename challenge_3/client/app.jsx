@@ -3,7 +3,7 @@ class App extends React.Component{
     super(props);
 
     this.state = {
-      checkoutID: 0,
+      checkoutID: Math.random(),
       formOne: {
         name: '',
         email: '',
@@ -23,17 +23,12 @@ class App extends React.Component{
         CVV: '',
         billingZip: ''
       },
-      unique: {
-        email: '',
-        addressOne: '',
-        creditCard: '',
-      },
       checkout: true,
       form1: false,
       form2: false,
       form3: false,
       confirm: false,
-      purchased: false
+      purchased: false,
     }
   }
 
@@ -43,13 +38,6 @@ class App extends React.Component{
     this.setState({
       formOne: formOne
     })
-    if (propertyName === 'email') {
-      const unique = this.state.unique;
-      unique[propertyName] = event.target.value;
-      this.setState({
-        unique: unique
-      })
-    }
   };
 
   handleChangeTwo(propertyName, event) {
@@ -58,13 +46,6 @@ class App extends React.Component{
     this.setState({
       formTwo: formTwo
     })
-    if (propertyName === 'addressOne') {
-      const unique = this.state.unique;
-      unique[propertyName] = event.target.value;
-      this.setState({
-        unique: unique
-      })
-    }
   };
 
   handleChangeThree(propertyName, event) {
@@ -73,13 +54,6 @@ class App extends React.Component{
     this.setState({
       formThree: formThree
     })
-    if (propertyName === 'creditCard') {
-      const unique = this.state.unique;
-      unique[propertyName] = event.target.value;
-      this.setState({
-        unique: unique
-      })
-    }
   };
 
   handleOneSubmit(event) {
@@ -142,21 +116,6 @@ class App extends React.Component{
     })
   }
 
-  // handleGet(event) {
-  //   event.preventDefault();
-  //   let unique = this.state.unique;
-  //   fetch('/confirm', {
-  //     method: "GET",
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //     },
-  //     body: JSON.stringify(unique)
-  //   })
-  //   .then((response) => { return console.log(response.json()) })
-  //   .catch((err) => { console.error(err) })
-  // }
-
   handleCheckout(event) {
     event.preventDefault();
     fetch('/checkout', {
@@ -182,6 +141,21 @@ class App extends React.Component{
       confirm: false,
       checkout: true
     })
+  }
+
+  /// IMPLEMENT LATER IF HAVE TIME ///
+  handleGet(event) {
+    event.preventDefault();
+    fetch('/purchase', {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({checkoutID: this.state.checkoutID})
+    })
+    .then((response) => { return console.log(response.json()) })
+    .catch((err) => { console.error(err) })
   }
 
 
@@ -416,7 +390,6 @@ class App extends React.Component{
 
           }
         </div>
-
 
       </div>
     )
