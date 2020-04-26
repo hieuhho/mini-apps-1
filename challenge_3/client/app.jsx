@@ -385,7 +385,6 @@ class App extends React.Component{
               </div>
             </div>
 
-
             <button className="purchase" onClick={this.handlePurchase.bind(this)}> Purchase </button>
           </div>
             </div>
