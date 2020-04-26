@@ -212,7 +212,7 @@ class App extends React.Component{
 
         <div>
           { this.state.form2 &&
-          <div className="formTWo">
+            <div className="formTwo">
           <form>
 
             <div className="addressOne">
@@ -286,7 +286,7 @@ class App extends React.Component{
 
         <div>
           { this.state.form3 &&
-          <div className="formThree">
+            <div className="formThree">
           <form>
 
             <div className="creditCard">
@@ -340,10 +340,11 @@ class App extends React.Component{
           }
         </div>
 
-        <div className="confirm">
+        <div>
           { this.state.confirm &&
-          <div>
-            <div style={{fontSize: "20px"}}> Please Confirm </div>
+            <div className="confirm">
+              <div>
+            <div style={{fontSize: "20px"}}> <h1>Please Confirm </h1></div>
             <div>
               <div> Account </div>
               <div>
@@ -385,9 +386,9 @@ class App extends React.Component{
             </div>
 
 
-            <button onClick={this.handlePurchase.bind(this)}> Purchase </button>
+            <button className="purchase" onClick={this.handlePurchase.bind(this)}> Purchase </button>
           </div>
-
+            </div>
           }
         </div>
 
