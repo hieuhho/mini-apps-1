@@ -6,9 +6,13 @@ app.use(express.static('public'));
 app.use(express.json());
 
 app.post('/checkout', (req, res) => {
-  db.newCheckout(req.body);
-  res.send({lol: res.body})
-  res.end()
+  db.newCheckout(req.body, (err, data) => {
+    if (err) {
+      res.send(500).json(err)
+    } else {
+      res.send(data)
+    }
+  });
 })
 
 app.post('/formOne', (req, res) => {

@@ -4,6 +4,7 @@ class App extends React.Component{
 
     this.state = {
       checkoutID: Math.random(),
+      _id: '',
       formOne: {
         name: '',
         email: '',
@@ -59,7 +60,7 @@ class App extends React.Component{
   handleOneSubmit(event) {
     event.preventDefault();
     let formOne = this.state.formOne;
-    formOne['checkoutID'] = this.state.checkoutID;
+    formOne['_id'] = this.state._id;
     fetch('/formOne', {
       method: "POST",
       headers: {
@@ -68,7 +69,9 @@ class App extends React.Component{
       },
       body: JSON.stringify(formOne)
     })
-    .then((response) => { return console.log(response.json()) })
+    .then((response) => {
+      return response.json()
+    })
     .catch((err) => { console.error(err) });
     this.setState({
       form1: false,
@@ -79,7 +82,7 @@ class App extends React.Component{
   handleTwoSubmit(event) {
     event.preventDefault();
     let formTwo = this.state.formTwo;
-    formTwo['checkoutID'] = this.state.checkoutID;
+    formTwo['_id'] = this.state._id;
     fetch('/formTwo', {
       method: "POST",
       headers: {
@@ -88,7 +91,7 @@ class App extends React.Component{
       },
       body: JSON.stringify(formTwo)
     })
-    .then((response) => { return console.log(response.json()) })
+    .then((response) => { return response.json() })
     .catch((err) => { console.error(err) });
     this.setState({
       form2: false,
@@ -99,7 +102,7 @@ class App extends React.Component{
   handleThreeSubmit(event) {
     event.preventDefault();
     let formThree = this.state.formThree;
-    formThree['checkoutID'] = this.state.checkoutID;
+    formThree['_id'] = this.state._id;
     fetch('/formThree', {
       method: "POST",
       headers: {
@@ -108,7 +111,7 @@ class App extends React.Component{
       },
       body: JSON.stringify(formThree)
     })
-    .then((response) => { return console.log(response.json()) })
+    .then((response) => { return response.json() })
     .catch((err) => { console.error(err) });
     this.setState({
       form3: false,
@@ -126,7 +129,14 @@ class App extends React.Component{
       },
       body: JSON.stringify({checkoutID: this.state.checkoutID})
     })
-    .then((response) => { return console.log(response.json()) })
+    .then((response) => {
+      return response.json()
+    })
+    .then((data) => {
+      this.setState({
+        _id: data._id
+      })
+    })
     .catch((err) => { console.error(err) });
     this.setState({
       checkout: false,

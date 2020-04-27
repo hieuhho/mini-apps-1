@@ -23,15 +23,16 @@ let userDataSchema = mongoose.Schema({
 
 let UserData = mongoose.model('UserData', userDataSchema);
 
-let newCheckout = (form) => {
+let newCheckout = (form, cb) => {
   let newCheckout = new UserData({
     checkoutID: form.checkoutID
   })
-  newCheckout.save((err, doc) => {
+  return newCheckout.save((err, doc) => {
     if (err) {
-      return console.error('CHECK OUT ERROR', err.message)
+      cb(console.error('CHECK OUT ERROR', err.message))
+    } else {
+      cb(null, doc)
     }
-    console.log('Checking Out!')
   })
 };
 
@@ -42,7 +43,7 @@ let saveOne = (form) => {
     password: form.password
   };
 
-  UserData.updateOne({ checkoutID: `${form.checkoutID}`}, formOne, (err, doc) => {
+  UserData.updateOne({ _id: `${form._id}`}, formOne, (err, doc) => {
     if (err) {
       return console.error('SAVE FORM ONE ERROR', err.message)
     } else {
@@ -61,7 +62,7 @@ let saveTwo = (form) => {
     phone: form.phone
   };
 
-  UserData.updateOne({ checkoutID: `${form.checkoutID}`}, formTwo, (err, doc) => {
+  UserData.updateOne({ _id: `${form._id}`}, formTwo, (err, doc) => {
     if (err) {
       return console.error('SAVE FORM TWO ERROR', err.message)
     }
@@ -77,7 +78,7 @@ let saveThree = (form) => {
     billingZip: form.billingZip
   };
 
-  UserData.updateOne({ checkoutID: `${form.checkoutID}`}, formThree, (err, doc) => {
+  UserData.updateOne({ _id: `${form._id}`}, formThree, (err, doc) => {
     if (err) {
       return console.error('SAVE FORM THREE ERROR', err.message)
     }
@@ -87,7 +88,7 @@ let saveThree = (form) => {
 
 let find = (form) => {
   return UserData.find({
-    checkoutID: `${form.checkoutID}`
+    _id: `${form._id}`
   });
 }
 
